@@ -5,9 +5,6 @@ if (isset($_SESSION['trainername'])) {
     $trainernamet = $_SESSION['trainername'];
 }
 ?>
-
-
-
 <?php
 $trainer = [];
 try {
@@ -72,26 +69,34 @@ try {
             text-decoration: none;
             font-size: 15px;
         }
-
         .user table tr td .btn2 {
-            border: 6px solid red;
+            border: 6px solid purple;
             border-radius: 5px;
-            background-color: red;
+            background-color: purple;
             color: #fff;
             text-decoration: none;
             font-size: 15px;
         }
 
-        .user table tr td .btn3 {
-            border: 6px solid brown;
-            border-radius: 5px;
-            background-color: brown;
-            color: #fff;
-            text-decoration: none;
-            font-size: 15px;
-        }
     </style>
 </head>
+<?php
+$feedback = [];
+try {
+    $conn = new mysqli('localhost', 'root', '', 'gym');
+    $sql = "select * from feedback";
+    $res = $conn->query($sql);
+    if ($res->num_rows > 0) {
+        while ($a = $res->fetch_assoc()) {
+            array_push($feedback, $a);
+        }
+    }
+} catch (Exception $e) {
+    die('Database  Error : ' . $e->getMessage());
+}
+
+?>
+
 <body>
     <div class="bgs">
         <div class="user">
@@ -112,7 +117,7 @@ try {
                 </tr>
                 <?php for ($i = 0; $i < count($trainer); $i++) { ?>
                     <tr>
-                        <td><?php echo $i + 1 ?></td>
+                        <td><?php echo $trainer[$i]['id'] ?></td>
                         <td><?php echo $trainer[$i]['name'] ?></td>
                         <td><?php echo $trainer[$i]['address'] ?></td>
                         <td><?php echo $trainer[$i]['phone'] ?></td>
@@ -121,10 +126,11 @@ try {
                         <td><?php echo $trainer[$i]['time'] ?></td>
                         <td><?php echo $trainer[$i]['gender'] ?></td>
                         <td>
-                        <a class="btn1" href="trainer_sugg.php?id=<?php echo $trainer[$i]['id'] ?>"><i class="fa-solid fa-pen-to-square"></i>Give Suggest</a>                        </td>
+                            <a class="btn1" href="newdietplan.php?id=<?php echo $trainer[$i]["id"] ?>">Send Message</a>
+                        </td>
                     </tr>
-                <?php } ?>
 
+                <?php } ?>
             </table>
         </div>
     </div>

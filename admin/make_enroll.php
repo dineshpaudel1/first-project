@@ -145,7 +145,7 @@ include("adm.php");
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form1">
             <h1>Gym Enrollment Form by Admin</h1><br>
             <div class="group">
-                <input type="text" name="name" placeholder="Name*" value="<?php echo $name; ?>">
+                <input type="text" name="name" placeholder="Enter username" value="<?php echo $name; ?>">
                 <?php echo (isset($err['name']) ? $err['name'] : ''); ?>
             </div>
             <div class="group">
@@ -181,7 +181,7 @@ include("adm.php");
 
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        echo '<option value="' . $row['username'] . '">' . $row['username'] . '</option>';
+                        echo '<option value="' . $row['trainername'] . '">' . $row['trainername'] . '</option>';
                     }
                 }
                 ?>

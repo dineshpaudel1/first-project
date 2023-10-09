@@ -1,14 +1,5 @@
 <?php
 include("nav.php");
-if (isset($_COOKIE['username'])) {
-    session_start();
-    $_SESSION['id'] =
-        $_SESSION['username'] =  $_COOKIE['username'];
-    $_SESSION['login_status'] = true;
-    header('location:f.php');
-}
-
-
 $username = '';
 if (isset($_POST['btnLogin'])) {
     $err  = [];

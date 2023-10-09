@@ -1,8 +1,6 @@
 <?php require_once 'check_admin.php'; ?>
 <?php require_once 'expire_session.php'; ?>
 <?php
-include("adm.php");
-$name = $address = $phone = $email = $username = $password = $gender = $res = '';
 if (isset($_POST['btnRegister'])) {
   $err = [];
   if (isset($_POST['name']) && !empty($_POST['name']) && trim($_POST['name'])) {
@@ -25,10 +23,10 @@ if (isset($_POST['btnRegister'])) {
   } else {
     $err['email'] = "Enter email";
   }
-  if (isset($_POST['username']) && !empty($_POST['username']) && trim($_POST['username'])) {
-    $username = $_POST['username'];
+  if (isset($_POST['trainername']) && !empty($_POST['trainername']) && trim($_POST['trainername'])) {
+    $trainername = $_POST['trainername'];
   } else {
-    $err['username'] = "Enter username";
+    $err['trainername'] = "Enter trainername";
   }
 
   if (isset($_POST['password']) && !empty($_POST['password'])) {
@@ -41,16 +39,10 @@ if (isset($_POST['btnRegister'])) {
   } else {
     $err['gender'] = "Enter gender";
   }
-
-  $targetDir = "avatars/"; // Directory to store uploaded avatars
-  $avatarName = $_FILES["avatar"]["name"];
-  $avatarTmpName = $_FILES["avatar"]["tmp_name"];
-  $avatarPath = $targetDir . $avatarName;
-  move_uploaded_file($avatarTmpName, $avatarPath);
   if (count($err) == 0) {
     try {
       $conn = new mysqli('localhost', 'root', '', 'gym');
-      $sql = "insert into trainer (name,address,phone,email,username,password,avatar,gender) values('$name','$address','$phone','$email','$username','$password','$avatarPath','$gender')";
+      $sql = "insert into trainer (name,address,phone,email,trainername,password,gender) values('$name','$address','$phone','$email','$trainername','$password','$gender')";
       $conn->query($sql);
       if ($conn->affected_rows == 1 && $conn->insert_id > 0) {
         header('location:trainer.php?action=1');
@@ -66,7 +58,9 @@ if (isset($_POST['btnRegister'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+  include ("adm.php");
+  ?>
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -166,16 +160,12 @@ if (isset($_POST['btnRegister'])) {
         <?php echo (isset($err['email']) ? $err['email'] : ''); ?>
       </div>
       <div class="group">
-        <input type="text" name="username" placeholder="username">
-        <?php echo (isset($err['username']) ? $err['username'] : ''); ?>
+        <input type="text" name="trainername" placeholder="trainername">
+        <?php echo (isset($err['trainername']) ? $err['trainername'] : ''); ?>
       </div>
       <div class="group">
         <input type="text" name="password" placeholder="password">
         <?php echo (isset($err['password']) ? $err['password'] : ''); ?>
-      </div>
-      <div class="group">
-        <label for="avatar">Upload Image:</label>
-        <input type="file" id="avatar" name="avatar" required>
       </div>
       <div class="group">
         <input type="radio" name="gender" value="Male">Male
@@ -183,10 +173,10 @@ if (isset($_POST['btnRegister'])) {
       </div>
       <div class="btn" id="">
         <button name="btnRegister" value="Register">Register</button><br>
-        <br><label><?php echo $res; ?></label>
       </div>
     </form>
   </div>
+
 </body>
 
 </html>

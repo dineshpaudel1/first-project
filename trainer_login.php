@@ -1,13 +1,12 @@
 <?php
 include("nav.php");
-$trainername = '';
 if (isset($_POST['btnLogin'])) {
     $err  = [];
     if (isset($_POST['trainername']) && !empty($_POST['trainername']) && trim($_POST['trainername'])) {
         $trainername = $_POST['trainername'];
-      } else {
+    } else {
         $err['trainername'] = "Enter trainername";
-      }
+    }
 
     if (isset($_POST['password']) && !empty($_POST['password']) && trim($_POST['password'])) {
         $password = $_POST['password'];
@@ -20,7 +19,7 @@ if (isset($_POST['btnLogin'])) {
     if ($conn->connect_error) {
         die("Connection Failed : " . $conn->connect_error);
     } else {
-        $stmt = $conn->prepare("select * from trainer where username = ?");
+        $stmt = $conn->prepare("select * from trainer where trainername = ?");
         $stmt->bind_param("s", $trainername);
         $stmt->execute();
         $stmt_result = $stmt->get_result();
@@ -160,25 +159,11 @@ if (isset($_POST['btnLogin'])) {
                 <div class="group">
                     <i class="fa-solid fa-fingerprint"></i>
                     <input type="password" placeholder="password" name="password" required>
-                    <i class="eye bi bi-eye-slash" id="togglePassword"></i>
                 </div>
                 <button value="Login" name="btnLogin">Login</button><br>
             </form>
         </div>
     </div>
-    <script>
-        const togglePassword = document.querySelector("#togglePassword");
-        const password = document.querySelector("#password");
-
-        togglePassword.addEventListener("click", function() {
-            // toggle the type attribute
-            const type = password.getAttribute("type") === "password" ? "text" : "password";
-            password.setAttribute("type", type);
-
-            // toggle the icon
-            this.classList.toggle("bi-eye");
-        });
-    </script>
     <?php
     include("footer.php");
     ?>

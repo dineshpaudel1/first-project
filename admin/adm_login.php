@@ -155,25 +155,11 @@ if (isset($err) && count($err) == 0) {
                 <div class="group">
                     <i class="fa-solid fa-fingerprint"></i>
                     <input type="password" placeholder="password" name="password" required>
-                    <i class="eye bi bi-eye-slash" id="togglePassword"></i>
                 </div>
                 <button value="Login" name="btnLogin">Login</button><br>
             </form>
         </div>
     </div>
-    <script>
-        const togglePassword = document.querySelector("#togglePassword");
-        const password = document.querySelector("#password");
-
-        togglePassword.addEventListener("click", function() {
-            // toggle the type attribute
-            const type = password.getAttribute("type") === "password" ? "text" : "password";
-            password.setAttribute("type", type);
-
-            // toggle the icon
-            this.classList.toggle("bi-eye");
-        });
-    </script>
 </body>
 
 </html>

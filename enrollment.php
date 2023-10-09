@@ -160,7 +160,7 @@ try {
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form1">
             <h1>Gym Enrollment Form by User</h1><br>
             <div class="group">
-                <input type="text" name="name" placeholder="Name*" value="<?php echo $gym_user['name']; ?>">
+                <input type="text" name="name" placeholder="Name*" value="<?php echo $gym_user['username']; ?>">
                 <?php echo (isset($err['name']) ? $err['name'] : ''); ?>
             </div>
             <div class="group">

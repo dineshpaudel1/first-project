@@ -101,9 +101,8 @@ try {
                     <th>Address</th>
                     <th>Phone</th>
                     <th>Email</th>
-                    <th>Username</th>
+                    <th>Trainername</th>
                     <th>Gender</th>
-                    <th>Photo</th>                   
                     <th colspan="3">Operation</th>
                     <th rowspan="7">
                         <a class="btn3" href="add_trainer.php"><i class="fa-solid fa-plus"></i>Add Trainer</a>
@@ -116,9 +115,8 @@ try {
                         <td><?php echo $trainers[$i]['address'] ?></td>
                         <td><?php echo $trainers[$i]['phone'] ?></td>
                         <td><?php echo $trainers[$i]['email'] ?></td>
-                        <td><?php echo $trainers[$i]['username'] ?></td>
+                        <td><?php echo $trainers[$i]['trainername'] ?></td>
                         <td><?php echo $trainers[$i]['gender'] ?></td>
-                        <td><?php echo "<img src='$avatarPath' alt='Avatar' width='100'><br><br>"; ?></td>
                         <td>
                             <a class="btn1" href="update_trainer.php?id=<?php echo $trainers[$i]['id'] ?>"><i class="fa-solid fa-pen-to-square"></i>update</a>
                         </td>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2023 at 03:14 AM
+-- Generation Time: Oct 09, 2023 at 05:55 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,6 +43,27 @@ INSERT INTO `admin` (`id`, `adminname`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dietplan`
+--
+
+CREATE TABLE `dietplan` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `trainername` varchar(255) NOT NULL,
+  `goal` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dietplan`
+--
+
+INSERT INTO `dietplan` (`id`, `username`, `trainername`, `goal`) VALUES
+(14, 'arjun12345', 'ram12345', 'hello arjun...'),
+(15, 'arjun12345', 'ram12345', 'what are  you doing');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `enrollment`
 --
 
@@ -62,8 +83,29 @@ CREATE TABLE `enrollment` (
 --
 
 INSERT INTO `enrollment` (`id`, `name`, `address`, `phone`, `package`, `coach`, `time`, `gender`) VALUES
-(32, 'sathi12345', 'gwarko', '93484938', 'Basic', 'dinesh12345', 'Day', 'Male'),
-(34, 'ramesh', 'gwarko', '9863764736', 'pro', 'ramesh12345', 'Day', 'Male');
+(43, 'arjun12345', 'gwarko', '9822662258', 'Basic', 'ram12345', 'Morning', 'Male'),
+(44, 'ganesh12345', 'gwarko', '9825525254', 'Premium', 'ram12345', 'Evening', 'Male');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `id` int(11) NOT NULL,
+  `trainername` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `trainername`, `username`, `message`) VALUES
+(14, 'ram12345', 'arjun12345', 'hi sirr'),
+(15, 'ram12345', 'arjun12345', 'nothing just working sir....');
 
 -- --------------------------------------------------------
 
@@ -88,8 +130,8 @@ CREATE TABLE `gym_user` (
 
 INSERT INTO `gym_user` (`id`, `name`, `address`, `phone`, `email`, `username`, `password`, `gender`) VALUES
 (40, 'dinesh', 'gwarko', '9847503434', 'dinesh@gmail.com', 'dinesh12345', '827ccb0eea8a706c4c34a16891f84e7b', 'Male'),
-(41, 'paudel', 'Sinamangal', '8498398493', 'paudel@gmail.com', 'paudel12345', '827ccb0eea8a706c4c34a16891f84e7b', 'Male'),
-(43, 'Dinesh Paudel', 'lalitpur', '9847503435', 'dinesh1@gmail.com', 'dinesh1234', '827ccb0eea8a706c4c34a16891f84e7b', 'female');
+(48, 'arjun12345', 'gwarko', '9822662258', 'arjun@gmail.com', 'arjun12345', '827ccb0eea8a706c4c34a16891f84e7b', 'Male'),
+(49, 'Ganesh', 'Gwako', '9822548667', 'ganeshdhakal@gmail.com', 'ganesh12345', '827ccb0eea8a706c4c34a16891f84e7b', 'Male');
 
 -- --------------------------------------------------------
 
@@ -111,9 +153,9 @@ CREATE TABLE `package` (
 --
 
 INSERT INTO `package` (`id`, `plan`, `cost`, `offers`, `shift`, `discount`) VALUES
-(10, 'Basic', '$20 per Month', 'free dumbbells', 'Morning', '10%'),
+(10, 'Basic', '$25 per Month', 'free dumbbells', 'Morning', '10%'),
 (13, 'Premium', '$45 six months', 'free dumbbells', 'Morning/Day/Evening', '20%'),
-(14, 'extra', '$50 per month', 'free diet', 'day', '50%');
+(15, 'Normal', '$10', 'one time diet', 'Evening', '20%');
 
 -- --------------------------------------------------------
 
@@ -127,7 +169,7 @@ CREATE TABLE `trainer` (
   `address` varchar(50) NOT NULL,
   `phone` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
+  `trainername` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `gender` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -136,8 +178,8 @@ CREATE TABLE `trainer` (
 -- Dumping data for table `trainer`
 --
 
-INSERT INTO `trainer` (`id`, `name`, `address`, `phone`, `email`, `username`, `password`, `gender`) VALUES
-(55, 'dinesh', 'gwarko', '08394400', 'dinesh@gmail.com', 'dinesh12345', '12345', 'Male');
+INSERT INTO `trainer` (`id`, `name`, `address`, `phone`, `email`, `trainername`, `password`, `gender`) VALUES
+(5, 'Ramesh', 'gwarko', '9867508467', 'ram@gmail.com', 'ram12345', '827ccb0eea8a706c4c34a16891f84e7b', 'Male');
 
 --
 -- Indexes for dumped tables
@@ -150,11 +192,23 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `dietplan`
+--
+ALTER TABLE `dietplan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `enrollment`
 --
 ALTER TABLE `enrollment`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `phone` (`phone`);
+
+--
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `gym_user`
@@ -176,8 +230,8 @@ ALTER TABLE `package`
 --
 ALTER TABLE `trainer`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `trainername` (`trainername`),
   ADD UNIQUE KEY `phone` (`phone`),
-  ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
@@ -191,28 +245,40 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `dietplan`
+--
+ALTER TABLE `dietplan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `enrollment`
 --
 ALTER TABLE `enrollment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `gym_user`
 --
 ALTER TABLE `gym_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `package`
 --
 ALTER TABLE `package`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `trainer`
 --
 ALTER TABLE `trainer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

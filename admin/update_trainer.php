@@ -26,23 +26,17 @@ if (isset($_POST['btnUpdate'])) {
   } else {
     $err['email'] = "Enter email";
   }
-  $username = $_POST['username'];
+  $trainername = $_POST['trainername'];
   if (isset($_POST['gender']) && !empty($_POST['gender']) && trim($_POST['gender'])) {
     $gender = $_POST['gender'];
   } else {
     $err['gender'] = "Enter gender";
-  }
-
-  $targetDir = "avatars/"; // Directory to store uploaded avatars
-  $avatarName = $_FILES["avatar"]["name"];
-  $avatarTmpName = $_FILES["avatar"]["tmp_name"];
-  $avatarPath = $targetDir . $avatarName;
-  move_uploaded_file($avatarTmpName, $avatarPath);
+  } 
 
   if (count($err) == 0) {
     try {
       $conn = new mysqli('localhost', 'root', '', 'gym');
-      $sql = "update trainer set name='$name',address='$address',phone='$phone',email='$email',username='$username',avatar='$avatarPath' ,gender='$gender' where id=$id";
+      $sql = "update trainer set name='$name',address='$address',phone='$phone',email='$email',trainername='$trainername',gender='$gender' where id=$id";
       $conn->query($sql);
       if ($conn->affected_rows == 1) {
         header('location:trainer.php?action=1');
@@ -176,16 +170,12 @@ include("adm.php"); ?>
         <?php echo (isset($err['email']) ? $err['email'] : ''); ?>
       </div>
       <div class="group">
-        <input type="text" name="username" placeholder="username" value="<?php echo $username; ?>">
-        <?php echo (isset($err['username']) ? $err['username'] : ''); ?>
+        <input type="text" name="trainername" placeholder="trainername" value="<?php echo $trainername; ?>">
+        <?php echo (isset($err['trainername']) ? $err['trainername'] : ''); ?>
       </div>
       <div class="group">
         <input type="text" name="password" placeholder="password">
         <?php echo (isset($err['password']) ? $err['password'] : ''); ?>
-      </div>
-      <div class="group">
-        <label for="avatar">Upload Image:</label>
-        <input type="file" id="avatar" name="avatar" value="<?php echo $avatar; ?>" required>
       </div>
       <?php
       if ($user['gender'] == "Male") { ?>

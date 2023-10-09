@@ -1,6 +1,6 @@
 <?php
 include("nav.php");
-$name = $address = $phone = $email = $username = $password = $gender = $res = '';
+$name = $address = $phone = $email = $trainername = $password = $gender = $res = '';
 if (isset($_POST['btnRegister'])) {
   $err = [];
   if (isset($_POST['name']) && !empty($_POST['name']) && trim($_POST['name'])) {
@@ -28,10 +28,10 @@ if (isset($_POST['btnRegister'])) {
   } else {
     $err['email'] = "Enter email";
   }
-  if (isset($_POST['username']) && !empty($_POST['username']) && trim($_POST['username'])) {
-    $username = $_POST['username'];
+  if (isset($_POST['trainername']) && !empty($_POST['trainername']) && trim($_POST['trainername'])) {
+    $trainername = $_POST['trainername'];
   } else {
-    $err['username'] = "Enter username";
+    $err['trainername'] = "Enter trainername";
   }
 
   if (isset($_POST['password']) && !empty($_POST['password'])) {
@@ -49,7 +49,7 @@ if (isset($_POST['btnRegister'])) {
   if (count($err) == 0) {
     try {
       $conn = new mysqli('localhost', 'root', '', 'gym');
-      $sql = "insert into trainer (name,address,phone,email,username,password,gender) values('$name','$address','$phone','$email','$username','$password','$gender')";
+      $sql = "insert into trainer (name,address,phone,email,trainername,password,gender) values('$name','$address','$phone','$email','$trainername','$password','$gender')";
       $conn->query($sql);
       if ($conn->affected_rows == 1 && $conn->insert_id > 0) {
         header('location:how_to_login.php');
@@ -164,8 +164,8 @@ if (isset($_POST['btnRegister'])) {
         <?php echo (isset($err['email']) ? $err['email'] : ''); ?>
       </div>
       <div class="group">
-        <input type="text" name="username" placeholder="username" value="<?php echo $username; ?>">
-        <?php echo (isset($err['username']) ? $err['username'] : ''); ?>
+        <input type="text" name="trainername" placeholder="trainername" value="<?php echo $trainername; ?>">
+        <?php echo (isset($err['trainername']) ? $err['trainername'] : ''); ?>
       </div>
       <div class="group">
         <input type="text" name="password" placeholder="password">

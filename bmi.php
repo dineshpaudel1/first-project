@@ -9,9 +9,17 @@ include("nav.php"); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMI Calculator</title>
     <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: linear-gradient(to right, #2691d9, #ffffff);
+            height: 100vh;
+            width: 100%;
+        }
+
         section {
             margin-left: 500px;
-            margin-top: 50px;
+            margin-top: 62.5px;
             height: 78.6vh;
         }
 
