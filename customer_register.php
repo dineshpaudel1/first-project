@@ -14,12 +14,13 @@ if (isset($_POST['btnRegister'])) {
     } else {
         $err['address'] = "Enter valid address";
     }
-    if (isset($_POST['phone']) && !empty($_POST['phone']) && trim($_POST['phone'])) {
-        $phone = $_POST['phone'];
+    $phone = $_POST['phone']; 
+    $phone = preg_replace('/[^0-9]/', '', $phone);
+    if (strlen($phone) === 10) {
+        echo "";
     } else {
-        $err['phone'] = "Enter phone";
+        echo "Invalid phone number";
     }
-
     if (isset($_POST['email']) && !empty($_POST['email']) && trim($_POST['email'])) {
         $email = $_POST['email'];
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -39,10 +40,9 @@ if (isset($_POST['btnRegister'])) {
     } else {
         $err['password'] = "Enter valid password";
     }
-    if (isset($_POST['cpassword']) && !empty($_POST['cpassword']) && (($_POST['password']) == ($_POST['cpassword'])) ) {
+    if (isset($_POST['cpassword']) && !empty($_POST['cpassword']) && (($_POST['password']) == ($_POST['cpassword']))) {
         $cpassword = md5($_POST['cpassword']);
-    }
-     else {
+    } else {
         $err['cpassword'] = "password do not Match";
     }
 
@@ -257,7 +257,7 @@ if (isset($_POST['btnRegister'])) {
     <br>
     <br>
     <?php
-    include("footer.php") 
+    include("footer.php")
     ?>
 </body>
 

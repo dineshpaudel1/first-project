@@ -64,7 +64,7 @@
   if (isset($_SESSION["trainername"]) && !empty($_SESSION['trainername'])) {
   ?>
     <div class="topnav">
-      <a href="f.php">Home</a>
+      <a href="index.php">Home</a>
       <a href="about.php">About Us</a>
       <a href="contact.php">Contact</a>
     <?php
@@ -72,7 +72,7 @@
 
     ?>
       <div class="topnav">
-        <a href="f.php">Home</a>
+        <a href="index.php">Home</a>
         <a href="package.php">Package</a>
         <a href="about.php">About Us</a>
         <a href="contact.php">Contact</a>
@@ -82,16 +82,16 @@
         <?php
         if (isset($_SESSION["username"]) && !empty($_SESSION['username'])) {
         ?>
-          <a href="diettable.php" onclick="openForm()"><i class="fa-solid fa-envelope"></i></a>
+          <a href="diettable.php" onclick="openForm()"><i class="fa-solid fa-envelope"></i>Message</a>
           <a href="bmi.php" onclick="openForm()"><i class="fa-solid fa-chart-simple"></i> My BMI</a>
           <a href="user_profile.php" onclick="openForm()"><i class="fa-solid fa-user"></i> My Profile</a>
           <a href="logout.php"><i class="fa-solid fa-right-to-bracket"></i>Logout</a>
 
 
         <?php
-        } elseif (isset($_SESSION["trainername"]) && !empty($_SESSION['trainername'])) {
+        } elseif (isset($_SESSION["trainername"]) && !empty($_SESSION['trainername'])) {  
         ?>
-          <a href="tablefeedback.php" onclick="openForm()"><i class="fa-solid fa-envelope"></i></a>
+          <a href="tablefeedback.php" onclick="openForm()"><i class="fa-solid fa-envelope"></i>Message</a>
           <a href="myuser.php" onclick="openForm()"><i class="fa-solid fa-chart-simple"></i> My users</a> <a href="user_profile.php" onclick="openForm()"><i class="fa-solid fa-user"></i> My Profile</a>
           <a href="logout.php"><i class="fa-solid fa-right-to-bracket"></i>Logout</a>
         <?php

@@ -26,14 +26,14 @@ if (isset($_POST['btnLogin'])) {
         if ($stmt_result->num_rows > 0) {
             $data = $stmt_result->fetch_assoc();
             if ($data['password'] === $password) {
-                header('location:f.php');
+                header('location:index.php');
             } else {
                 echo "<h2>invalid password</h2>";
             }
             session_start();
             $_SESSION['trainername'] =  $trainername;
             $_SESSION['login_status'] = true;
-            header('location:f.php');
+            header('location:index.php');
         } else {
             echo "<h2>invalid username</h2>";
         }
