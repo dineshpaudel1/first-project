@@ -26,62 +26,62 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .bgs {
-            height: 618px;
-        }
+    .bgs {
+        height: 618px;
+    }
 
-        .user {
-            display: flex;
-            justify-content: center;
-            margin-left: 220px;
-        }
+    .user {
+        display: flex;
+        justify-content: center;
+        margin-left: 220px;
+    }
 
-        .user table {
-            margin-top: 85px;
-            width: 1000px;
-        }
+    .user table {
+        margin-top: 85px;
+        width: 1000px;
+    }
 
-        .user table tr {
-            height: 50px;
-        }
+    .user table tr {
+        height: 50px;
+    }
 
-        .user table tr th {
-            font-size: 18px;
-        }
+    .user table tr th {
+        font-size: 18px;
+    }
 
-        .user table tr td {
-            text-align: center;
-            font-size: 18px;
-            margin: 5px;
-            text-decoration: none;
-        }
+    .user table tr td {
+        text-align: center;
+        font-size: 18px;
+        margin: 5px;
+        text-decoration: none;
+    }
 
-        .user table tr td .btn1 {
-            border: 6px solid Green;
-            border-radius: 5px;
-            background-color: Green;
-            color: #fff;
-            text-decoration: none;
-            font-size: 18px;
-        }
+    .user table tr td .btn1 {
+        border: 6px solid Green;
+        border-radius: 5px;
+        background-color: Green;
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+    }
 
-        .user table tr td .btn2 {
-            border: 6px solid red;
-            border-radius: 5px;
-            background-color: red;
-            color: #fff;
-            text-decoration: none;
-            font-size: 18px;
-        }
+    .user table tr td .btn2 {
+        border: 6px solid red;
+        border-radius: 5px;
+        background-color: red;
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+    }
 
-        .user table tr th .btn3 {
-            border: 6px solid brown;
-            border-radius: 5px;
-            background-color: brown;
-            color: #fff;
-            text-decoration: none;
-            font-size: 18px;
-        }
+    .user table tr th .btn3 {
+        border: 6px solid brown;
+        border-radius: 5px;
+        background-color: brown;
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+    }
     </style>
 </head>
 
@@ -90,7 +90,7 @@ try {
         <div class="user">
             <table>
                 <tr>
-                    <th colspan="9" style="color:Red" >User Detail</th>
+                    <th colspan="9" style="color:Red">User Detail</th>
                 </tr>
                 <tr>
                     <th>id</th>
@@ -106,23 +106,25 @@ try {
                     </th>
                 </tr>
                 <?php for ($i = 0; $i < count($users); $i++) { ?>
-                    <tr>
+                <tr>
 
-                        <td><?php echo $i + 1 ?></td>
-                        <td><?php echo $users[$i]['name'] ?></td>
-                        <td><?php echo $users[$i]['address'] ?></td>
-                        <td><?php echo $users[$i]['phone'] ?></td>
-                        <td><?php echo $users[$i]['email'] ?></td>
-                        <td><?php echo $users[$i]['username'] ?></td>
-                        <td><?php echo $users[$i]['gender'] ?></td>
-                        <td>
-                            <a class="btn1" href="update_user.php?id=<?php echo $users[$i]['id'] ?>"><i class="fa-solid fa-pen-to-square"></i>update</a>
-                        </td>
-                        <td>
-                            <a class="btn2" href="delete.php?id=<?php echo $users[$i]['id'] ?>" onclick="return confirm('Are you sure?')"><i class="fa-solid fa-trash"></i>delete</a>
-                        </td>
+                    <td><?php echo $i + 1 ?></td>
+                    <td><?php echo $users[$i]['name'] ?></td>
+                    <td><?php echo $users[$i]['address'] ?></td>
+                    <td><?php echo $users[$i]['phone'] ?></td>
+                    <td><?php echo $users[$i]['email'] ?></td>
+                    <td><?php echo $users[$i]['username'] ?></td>
+                    <td><?php echo $users[$i]['gender'] ?></td>
+                    <td>
+                        <a class="btn1" href="update_user.php?id=<?php echo $users[$i]['id'] ?>"><i
+                                class="fa-solid fa-pen-to-square"></i>update</a>
+                    </td>
+                    <td>
+                        <a class="btn2" href="delete.php?id=<?php echo $users[$i]['id'] ?>"
+                            onclick="return confirm('Are you sure?')"><i class="fa-solid fa-trash"></i>delete</a>
+                    </td>
 
-                    </tr>
+                </tr>
                 <?php } ?>
             </table>
         </div>

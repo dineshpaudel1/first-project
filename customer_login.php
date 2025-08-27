@@ -15,7 +15,6 @@ if (isset($_POST['btnLogin'])) {
         $err['password'] =  'Enter password';
     }
 
-
     $conn = new mysqli("localhost", "root", "", "gym");
     if ($conn->connect_error) {
         die("Connection Failed : " . $conn->connect_error);
@@ -45,147 +44,321 @@ if (isset($_POST['btnLogin'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Easy Admin Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Login - FitZone</title>
     <script src="https://kit.fontawesome.com/504bf32129.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-
     <style>
+        :root {
+            --bg-start: #1a1a1a;
+            --bg-end: #2d2d2d;
+            --text: #ffffff;
+            --muted: #cccccc;
+            --accent: #e74c3c;
+            --card-bg: rgba(255, 255, 255, .06);
+            --card-border: rgba(255, 255, 255, .15);
+            --maxw: 1200px;
+        }
+
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        /* style any PHP echo errors */
+        body>h2 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffb3b3;
+            background: rgba(231, 76, 60, .12);
+            border: 1px solid rgba(231, 76, 60, .35);
+            border-radius: 10px;
+            padding: 10px 12px;
+            max-width: var(--maxw);
+            margin: 12px auto 0;
+            text-align: center;
+            font-size: 1rem;
         }
 
         body {
-            background-image: url(images/gym.svg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            min-height: 100vh;
         }
 
-        .main {
-            background-image: url(images/wave.png);
-            height: 73.7vh;
-            width: 60%;
-        }
-
-        .container {
-            width: 350px;
-            margin: 100px 900px 100px 800px;
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .logo img {
-            height: 100px;
-            width: 100px;
-        }
-
-        .login-form {
-            background-color: #fff;
-            border-radius: 5px;
-            padding: 40px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-form h2 {
-            text-align: center;
-        }
-
-        .login-form input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        .login-form button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            background-color: #4caf50;
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .login-form button:hover {
-            background-color: #45a049;
-        }
-
-        .login-form button:active {
-            background-color: #3e8e41;
-        }
-
-        .login-form input:focus {
-            outline: none;
-            border-color: #4caf50;
-        }
-
-        .group {
+        /* NEW: page wrapper centers content; footer is outside this flex */
+        .page {
+            min-height: calc(100vh - 160px);
+            /* leave room for footer height */
             display: flex;
+            align-items: center;
             justify-content: center;
+            padding: 40px 16px;
         }
 
-        .group i {
-            margin: 10px;
+        .login-wrap {
+            width: 100%;
+            max-width: 420px;
         }
 
-        .eye {
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .35);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .card-head {
+            text-align: center;
+            padding: 22px 16px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+            background: rgba(255, 255, 255, .04);
+        }
+
+        .brand-mark {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            font-weight: 800;
+            letter-spacing: .3px;
+        }
+
+        .brand-mark i {
+            color: var(--accent)
+        }
+
+        .title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin: 6px 0 2px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, .35);
+        }
+
+        .sub {
+            color: var(--muted);
+            margin: 0 0 6px;
+        }
+
+        .card-body {
+            padding: 22px 20px 20px;
+        }
+
+        .form-row {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            font-weight: 800;
+            font-size: 13px;
+            color: #fff;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .field {
+            position: relative;
+        }
+
+        .field .icon {
             position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+        }
+
+        .toggle-eye {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ddd;
             cursor: pointer;
-            right: 307px;
-            top: 407px;
+            border: none;
+            background: transparent;
+        }
+
+        .toggle-eye:hover {
+            color: #fff
+        }
+
+        .input {
+            width: 100%;
+            padding: 12px 14px 12px 42px;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .08);
+            color: #fff;
+            outline: none;
+            font-size: 15.5px;
+            transition: border-color .2s, box-shadow .2s, background .2s, transform .1s;
+        }
+
+        .input::placeholder {
+            color: #9aa0a6
+        }
+
+        .input:focus {
+            border-color: rgba(231, 76, 60, .9);
+            background: rgba(255, 255, 255, .1);
+            box-shadow: 0 0 0 4px rgba(231, 76, 60, .15);
+            transform: translateY(-1px);
+        }
+
+        .row-inline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .remember {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            font-weight: 600;
+            font-size: .95rem;
+        }
+
+        .remember input {
+            transform: translateY(1px)
+        }
+
+        .btn {
+            width: 100%;
+            border: 1px solid rgba(231, 76, 60, .9);
+            background: var(--accent);
+            color: #fff;
+            font-weight: 800;
+            font-size: 16px;
+            padding: 12px 16px;
+            border-radius: 999px;
+            cursor: pointer;
+            box-shadow: 0 10px 26px rgba(231, 76, 60, .35);
+            transition: background .2s, transform .1s, box-shadow .2s;
+            margin-top: 4px;
+        }
+
+        .btn:hover {
+            background: #ff5b49;
+            transform: translateY(-1px);
+            box-shadow: 0 14px 30px rgba(231, 76, 60, .45);
+        }
+
+        .btn:active {
+            transform: translateY(0)
+        }
+
+        .links {
+            margin-top: 12px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px solid transparent;
+            transition: border-color .2s, color .2s;
+        }
+
+        .links a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        @media (max-width:480px) {
+            .title {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="main">
-        <div class="container">
-            <form class="login-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-                <h2>User Login</h2>
-                <div class="logo">
-                    <img src="images/logo.png" alt="Logo">
+    <main class="page">
+        <div class="login-wrap">
+            <section class="card">
+                <header class="card-head">
+                    <span class="brand-mark"><i class="fa-solid fa-dumbbell"></i> FitZone Gym</span>
+                    <h1 class="title">Customer Login</h1>
+                    <p class="sub">Welcome back! Please sign in to continue.</p>
+                </header>
+
+                <div class="card-body">
+                    <form class="form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" novalidate>
+                        <div class="form-row">
+                            <label for="username">Username</label>
+                            <div class="field">
+                                <i class="fa-solid fa-user icon"></i>
+                                <input class="input" type="text" id="username" name="username"
+                                    placeholder="Enter your username" value="<?php echo htmlspecialchars($username); ?>"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="password">Password</label>
+                            <div class="field">
+                                <i class="fa-solid fa-lock icon"></i>
+                                <input class="input" type="password" id="password" name="password"
+                                    placeholder="Enter your password" required>
+                                <button type="button" class="toggle-eye" id="togglePassword"
+                                    aria-label="Show/Hide password">
+                                    <i class="fa-solid fa-eye-slash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row-inline">
+                            <label class="remember">
+                                <input type="checkbox" name="remember" value="1"> Remember me
+                            </label>
+                            <a href="how_to_login.php" style="color:var(--muted); text-decoration:none;">Need help?</a>
+                        </div>
+
+                        <button value="Login" name="btnLogin" class="btn">Login</button>
+
+                        <div class="links">
+                            New here? <a href="customer_register.php">Create an account</a>
+                        </div>
+                    </form>
                 </div>
-                <div class="group">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="text" placeholder="username" name="username" required>
-                </div>
-                <div class="group">
-                    <i class="fa-solid fa-fingerprint"></i>
-                    <input type="password" placeholder="password" name="password" required>
-                    <i class="eye bi bi-eye-slash" id="togglePassword"></i>
-                </div>
-                <button value="Login" name="btnLogin">Login</button><br>
-            </form>
+            </section>
         </div>
-    </div>
+    </main>
+
     <script>
-        const togglePassword = document.querySelector("#togglePassword");
-        const password = document.querySelector("#password");
-
-        togglePassword.addEventListener("click", function() {
-            // toggle the type attribute
-            const type = password.getAttribute("type") === "password" ? "text" : "password";
-            password.setAttribute("type", type);
-
-            // toggle the icon
-            this.classList.toggle("bi-eye");
-        });
+        // Show/Hide password
+        (function() {
+            const btn = document.getElementById('togglePassword');
+            const input = document.getElementById('password');
+            if (btn && input) {
+                btn.addEventListener('click', function() {
+                    const show = input.getAttribute('type') === 'password';
+                    input.setAttribute('type', show ? 'text' : 'password');
+                    this.innerHTML = show ?
+                        '<i class="fa-solid fa-eye"></i>' :
+                        '<i class="fa-solid fa-eye-slash"></i>';
+                });
+            }
+        })();
     </script>
-    <?php
-    include("footer.php");
-    ?>
+
+    <?php include("footer.php"); ?>
 </body>
 
 </html>

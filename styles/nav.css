@@ -1,0 +1,180 @@
+    :root {
+        --nav-bg-start: #1a1a1a;
+        --nav-bg-end: #2d2d2d;
+        --nav-text: #ffffff;
+        --nav-muted: #cccccc;
+        --nav-accent: #e74c3c;
+        --maxw: 1200px;
+        --nav-h: 60px;
+        /* approx navbar height for scroll offset */
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* smooth scroll */
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
+
+    /* Give section targets some top margin when scrolled into view */
+    [id] {
+        scroll-margin-top: calc(var(--nav-h) + 16px);
+    }
+
+    /* ===== NAVBAR ===== */
+    .topnav {
+        background: linear-gradient(135deg, var(--nav-bg-start) 0%, var(--nav-bg-end) 100%);
+        color: var(--nav-text);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, .35);
+        border-bottom: 1px solid rgba(255, 255, 255, .08);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        /* stays at top */
+        height: var(--nav-h);
+    }
+
+    .topnav .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        height: 100%;
+    }
+
+    .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-right: 8px;
+    }
+
+    .brand i {
+        font-size: 20px;
+        color: var(--nav-accent);
+        text-shadow: 0 0 10px rgba(231, 76, 60, .25)
+    }
+
+    .brand span {
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: .3px
+    }
+
+    .nav-left a {
+        color: var(--nav-text);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 16px;
+        position: relative;
+        opacity: .95;
+        transition: color .2s ease, opacity .2s ease, transform .1s ease;
+    }
+
+    .nav-left a:hover {
+        color: var(--nav-accent);
+        opacity: 1
+    }
+
+    .nav-left a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        height: 2px;
+        width: 0;
+        background: var(--nav-accent);
+        transition: width .25s ease;
+    }
+
+    .nav-left a:hover::after {
+        width: 100%
+    }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 24px
+    }
+
+    .nav-right a {
+        color: var(--nav-text);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 16px;
+        white-space: nowrap;
+        transition: opacity .2s ease, transform .1s ease, color .2s ease;
+    }
+
+    .nav-right a i {
+        color: var(--nav-accent)
+    }
+
+    .nav-right a:hover {
+        color: #fff;
+        opacity: .9
+    }
+
+    .nav-right a:active {
+        transform: translateY(1px)
+    }
+
+    .btn-pill {
+        padding: 8px 14px;
+        border: 1px solid rgba(255, 255, 255, .15);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, .06);
+        backdrop-filter: blur(8px);
+    }
+
+    .btn-pill:hover {
+        border-color: rgba(231, 76, 60, .8);
+        background: var(--nav-accent);
+    }
+
+    @media (max-width: 860px) {
+        .topnav .wrap {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            height: auto
+        }
+
+        .nav-left {
+            gap: 18px;
+            flex-wrap: wrap
+        }
+
+        .nav-right {
+            gap: 16px;
+            flex-wrap: wrap
+        }
+
+        :root {
+            --nav-h: 88px;
+        }
+
+        /* taller on mobile */
+    }

@@ -492,7 +492,7 @@
     <div class="sidebar">
         <div class="logo-details">
             <img src="image/logo.png" alt="">
-            <span class="logo_name">Easy Fitness</span>
+            <span class="logo_name">Fit Zone</span>
         </div>
         <ul class="nav-links">
             <li>
